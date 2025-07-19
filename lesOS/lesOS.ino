@@ -1,9 +1,18 @@
 /*
- * author:  Ansen
- * data:    2025-07-15
+ * filename     : lesOS.ino
+ * Copyright    : Copyright (C) 2025 Ansen
+ * version      : 1.0.0
+ * license      : MIT
+ * Creation Date: 2025-07-15
+ * Last Updated : 2025-07-15
+ * Author       : Ansen
+ * Email        : alj79@sohu.com
  *
- * description: 
+ * Description: 
+ *  lesOS ( lightweight easy simple OS ) is for mcu with less memory.
  *  
+ * Notes:
+ *  Add new ID in loop() to add a new task for scheduling.
  */
 
 #include <util/atomic.h>
@@ -13,7 +22,6 @@
 #include "task.h"
 #include "bleed.h"
 
-// Compressor compressor;
 Timer timer;
 Test test;
 Task task;

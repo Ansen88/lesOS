@@ -1,9 +1,19 @@
 /*
- * author:  Ansen
- * data:    2025-07-15
+ * filename     : task.cpp
+ * Copyright    : Copyright (C) 2025 Ansen
+ * version      : 1.0.0
+ * license      : MIT
+ * Creation Date: 2025-07-15
+ * Last Updated : 2025-07-15
+ * Author       : Ansen
+ * Email        : alj79@sohu.com
  *
- * description: 
+ * Description: 
+ *  It provides a scheduler based on priority and task's state(block).
  *  
+ * Notes:
+ *  The functions xxxOnce() can let the task to be selected by scheduler. 
+ *  And when no task is selected, the scheduler will resume tasks according to the state(block).
  */
 
 #include <Arduino.h>
