@@ -42,6 +42,7 @@ static const int8_t ffsTable[256] = {
 
 static struct {
   bool block : 1;
+  bool block_ : 1;
 } status[TASK_ID_MAX];
 
 void Task::setup() {
@@ -59,6 +60,7 @@ int8_t Task::getNextPriority() {
 void Task::setBlock(enum task_id_number id) {
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
     status[id].block = true;
+    status[id].block_ = true;
     taskPriority &= ~(1 << id);
   }
 }
@@ -66,6 +68,7 @@ void Task::setBlock(enum task_id_number id) {
 void Task::clearBlock(enum task_id_number id) {
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
     status[id].block = false;
+    status[id].block_ = false;
     taskPriority |= 1 << id;
   }
 }
@@ -82,14 +85,21 @@ void Task::stopOnce(enum task_id_number id) {
   }
 }
 
+void Task::skipTask(enum task_id_number id) {
+  ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+    if (status[id].block_) {
+    }
+  }
+}
+
 void Task::restoreAll() {
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
     for (int i = 0; i < TASK_ID_MAX; i++) {
-        if(status[i].block){
-          taskPriority &= ~(1 << i);
-        }else{
-          taskPriority |= 1 << i;
-        }
+      if (status[i].block) {
+        taskPriority &= ~(1 << i);
+      } else {
+        taskPriority |= 1 << i;
+      }
     }
   }
 }

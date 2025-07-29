@@ -55,7 +55,7 @@ void loop() {
     default:
       // Serial.println("[main:] loop(sleep)");
       task.restoreAll();
-      if(!task.getNextPriority())
+      if(-1 != task.getNextPriority())  // -1: no task; the Priority is from 0 ~ 7
         sleep_cpu();
       
       break;

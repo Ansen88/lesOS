@@ -15,6 +15,7 @@ class Task
     void clearBlock(enum task_id_number id);
     void runOnce(enum task_id_number id);
     void stopOnce(enum task_id_number id);
+    void skipTask(enum task_id_number id);
     void restoreAll();
 };
 #endif
