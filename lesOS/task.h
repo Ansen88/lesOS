@@ -1,8 +1,12 @@
 #ifndef _TASK_H_
 #define _TASK_H_
 enum task_id_number{
+  // task's device
   TASK_ID_BLEED,
   TASK_ID_TEST,
+
+  // task's user
+  TASK_ID_USER,
   TASK_ID_MAX,
 };
 

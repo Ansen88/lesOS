@@ -41,7 +41,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  switch(task.getNextPriority()){
+  int8_t pri = task.getNextPriority();
+  if(pri != -1){
+    task.runOnce(TASK_ID_USER); // if there is any task except user's, run user's task once
+  }
+
+  switch(pri){
     case TASK_ID_BLEED:
       // Serial.println("[main:] loop(TASK_ID_BLEED)");
       bleed.loop();
@@ -50,6 +55,12 @@ void loop() {
     case TASK_ID_TEST:
       // Serial.println("[main:] loop(TASK_ID_TEST)");
       test.loop();
+      break;
+
+    case TASK_ID_USER:
+      // Serial.println("[main:] loop(TASK_ID_TEST)");
+      // if user's task finish, stop the user's task
+      task.stopOnce(TASK_ID_USER);
       break;
 
     default:
